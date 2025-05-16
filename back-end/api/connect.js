@@ -1,6 +1,14 @@
 import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
 
-const URI = "mongodb+srv://julianacosta:87loL25pjxAwwayq@cluster0.ffaijv0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// Carrega as variáveis de ambiente do arquivo .env
+dotenv.config();
+
+const URI = process.env.MONGODB_URI_ENV;
+
+if(!URI) {
+    throw new Error("MONGODB_URI_ENV não definida nas variáveis de ambiente");
+}
 
 const client = new MongoClient(URI);
 
